@@ -1,0 +1,32 @@
+def safe_file_reader():
+    """
+    Asks the user for a filename and attempts to read its content.
+    Handles FileNotFoundError and other I/O errors gracefully.
+    """
+    filename = input("Please enter the name of the file you want to read: ")
+
+    try:
+        # Attempt to open and read the file
+        with open(filename, 'r', encoding='utf-8') as file:
+            content = file.read()
+            print(f"\nSuccessfully read content from '{filename}':")
+            print("-" * 30)
+            print(content)
+            print("-" * 30)
+    except FileNotFoundError:
+        # Handle the specific case where the file does not exist
+        print(f"\nError: The file '{filename}' was not found.")
+        print("Please ensure the file exists and the filename is spelled correctly (including extension).")
+    except IOError as e:
+        # Handle other input/output errors (e.g., permission denied, corrupted file)
+        print(f"\nError: An I/O error occurred while trying to read '{filename}'.")
+        print(f"Details: {e}")
+    except Exception as e:
+        # Catch any other unexpected errors
+        print(f"\nAn unexpected error occurred: {e}")
+
+# --- Main execution ---
+if __name__ == "__main__":
+    print("--- Welcome to the File Error Handling Lab ---")
+    safe_file_reader()
+    print("\n--- Program Finished ---")
